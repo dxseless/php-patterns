@@ -23,6 +23,12 @@ class Singleton
     private function __clone()
     {}
 
+    // Предотвращаем десериализацию экземпляра
+    public function __wakeup()
+    {
+        throw new \Exception("Cannot unserialize a singleton.");
+    }
+
     /**
      * Клиенты осуществляют доступ к одиночке исключительно
      * через метод getInstance (название может быть любым)
